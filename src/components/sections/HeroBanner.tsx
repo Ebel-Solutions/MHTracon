@@ -1,0 +1,142 @@
+'use client';
+
+import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { bannerSlides } from '@/data/banner-slides';
+import { cn } from '@/lib/utils';
+
+export default function HeroBanner() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  const goToSlide = useCallback(
+    (index: number) => {
+      setDirection(index > currentSlide ? 1 : -1);
+      setCurrentSlide(index);
+    },
+    [currentSlide]
+  );
+
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + bannerSlides.length) % bannerSlides.length);
+  }, []);
+
+  // Auto-advance
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 6000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  const slide = bannerSlides[currentSlide];
+
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      x: dir > 0 ? '-100%' : '100%',
+      opacity: 0,
+    }),
+  };
+
+  return (
+    <section className="relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[750px] overflow-hidden bg-secondary-dark">
+      <AnimatePresence initial={false} custom={direction} mode="wait">
+        <motion.div
+          key={currentSlide}
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          className="absolute inset-0"
+        >
+          {/* Background Image */}
+          <Image
+            src={slide.bgImage}
+            alt={slide.title}
+            fill
+            className="object-cover"
+            priority={currentSlide === 0}
+            sizes="100vw"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/40" />
+
+          {/* Content */}
+          <div className="relative z-10 h-full flex items-center">
+            <div className="container mx-auto px-4">
+              <motion.div
+                initial={{ y: 40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="max-w-2xl"
+              >
+                <h6 className="text-primary font-heading font-semibold text-sm sm:text-base uppercase tracking-widest mb-3 sm:mb-4">
+                  {slide.subtitle}
+                </h6>
+                <h1 className="text-white font-heading font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight mb-6 sm:mb-8">
+                  {slide.title}
+                </h1>
+                <Link
+                  href={slide.buttonLink}
+                  className="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-sm font-heading font-medium text-sm uppercase tracking-wider hover:bg-primary-dark transition-colors group"
+                >
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  {slide.buttonText}
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-primary text-white flex items-center justify-center rounded-full transition-colors backdrop-blur-sm"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-primary text-white flex items-center justify-center rounded-full transition-colors backdrop-blur-sm"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
+        {bannerSlides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={cn(
+              'w-3 h-3 rounded-full transition-all duration-300',
+              currentSlide === index ? 'bg-primary w-8' : 'bg-white/50 hover:bg-white/80'
+            )}
+            aria-label={`Go to slide ${index + 1}`}
+            aria-current={currentSlide === index ? 'true' : 'false'}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
