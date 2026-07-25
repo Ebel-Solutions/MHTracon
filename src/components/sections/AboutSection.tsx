@@ -48,7 +48,7 @@ export default function AboutSection() {
 
             {/* Description */}
             <p className="text-body text-sm leading-relaxed font-body text-justify mb-6">
-              <strong>Webcon</strong> {companyInfo.aboutText.replace('Webcon ', '')}
+              <strong>MH Tracon</strong> {companyInfo.aboutText.replace('Webcon ', '')}
             </p>
 
             {/* Know More Button */}
@@ -71,8 +71,8 @@ export default function AboutSection() {
           >
             <div className="relative w-full h-[400px] lg:h-full rounded-lg overflow-hidden">
               <Image
-                src="/images/resource/about-3.jpg"
-                alt="Webcon Engineers Construction"
+                src="/images/resource/about-3.png"
+                alt="MH Tracon"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 33vw"

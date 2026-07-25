@@ -2,7 +2,8 @@
 
 @theme inline {
   /* Colors */
-  --color-primary: #f16d2b;
+  /* #f16d2b; */
+  --color-primary: #ecb142;
   --color-primary-dark: #c84605;
   --color-secondary: #2a3247;
   --color-secondary-dark: #1a1f2e;
@@ -21,15 +22,24 @@ body {
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling & scaling stability */
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Skip to content (accessibility) */
@@ -72,4 +82,13 @@ html {
 ::selection {
   background: var(--color-primary);
   color: white;
+}
+
+/* Hide scrollbar — cross-browser */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE / Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
 }

@@ -1,12 +1,11 @@
 import HeroBanner from '@/components/sections/HeroBanner';
 import AboutSection from '@/components/sections/AboutSection';
-import ServiceSection from '@/components/sections/ServiceSection';
+import ServicesSection from '@/components/sections/ServicesSection';
 import ProjectsCarousel from '@/components/sections/ProjectsCarousel';
 import CtaBanner from '@/components/sections/CtaBanner';
 import FeaturesGrid from '@/components/sections/FeaturesGrid';
 import ClientsCarousel from '@/components/sections/ClientsCarousel';
 import ContactInfoBar from '@/components/sections/ContactInfoBar';
-import { services } from '@/data/services';
 
 export default function HomePage() {
   return (
@@ -18,22 +17,21 @@ export default function HomePage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'Webcon Engineers Pvt. Ltd.',
-            url: 'https://webconengineers.com',
-            logo: 'https://webconengineers.com/images/logos/logo-3-1.png',
+            name: 'MH Tracon',
+            url: 'https://mhtracon.com',
+            logo: 'https://mhtracon.com/images/logos/logo-1.png',
             description:
-              'PEB Projects Consultants and Civil Engineering Company in Kolkata with 25+ years of experience.',
+              'MH Tracon is a Riyadh-based multi-solutions company delivering engineering, MEP, security, AI, interior design, and business solutions across Saudi Arabia.',
             address: {
               '@type': 'PostalAddress',
-              streetAddress: '263, Jodhpur Park',
-              addressLocality: 'Kolkata',
-              addressRegion: 'West Bengal',
-              postalCode: '700068',
-              addressCountry: 'IN',
+              streetAddress: 'AL Jandriya',
+              addressLocality: 'Riyadh',
+              postalCode: '13611',
+              addressCountry: 'SA',
             },
-            telephone: '+91-33-24140232',
-            email: 'info@webconengineers.com',
-            sameAs: [],
+            telephone: '+966506030311',
+            email: 'info@mhtracon.com',
+            sameAs: ['https://mhtracon.com'],
           }),
         }}
       />
@@ -44,24 +42,22 @@ export default function HomePage() {
       {/* About Company Section */}
       <AboutSection />
 
-      {/* Services - Rendered from data */}
-      {services.map((service) => (
-        <ServiceSection key={service.id} service={service} />
-      ))}
+      {/* Services Grid */}
+      <ServicesSection />
 
-      {/* Projects Carousel */}
+      {/* Projects Portfolio */}
       <ProjectsCarousel />
 
       {/* Call to Action */}
       <CtaBanner />
 
-      {/* PEB Features Grid */}
+      {/* Features / Why Choose Us */}
       <FeaturesGrid />
 
       {/* Clients Logo Carousel */}
       <ClientsCarousel />
 
-      {/* Contact Information */}
+      {/* Contact Information Bar */}
       <ContactInfoBar />
     </>
   );

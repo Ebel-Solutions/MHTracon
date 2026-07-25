@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
-import { companyInfo, socialLinks } from '@/data/company';
-import { footerTags, galleryItems } from '@/data/footer';
+import { ArrowRight, MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { companyInfo, socialLinks, phoneNumbers, emailAddresses } from '@/data/company';
+import { footerQuickLinks, footerServices } from '@/data/footer';
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -30,21 +30,43 @@ function LinkedinIcon({ className }: { className?: string }) {
 
 function getSocialIcon(iconName: string) {
   switch (iconName) {
-    case 'facebook':
-      return <FacebookIcon className="h-4 w-4" />;
-    case 'twitter':
-      return <TwitterIcon className="h-4 w-4" />;
-    case 'linkedin':
-      return <LinkedinIcon className="h-4 w-4" />;
-    default:
-      return null;
+    case 'facebook': return <FacebookIcon className="h-4 w-4" />;
+    case 'twitter': return <TwitterIcon className="h-4 w-4" />;
+    case 'linkedin': return <LinkedinIcon className="h-4 w-4" />;
+    default: return null;
   }
+}
+
+function FooterHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h5 className="font-heading font-semibold text-white text-base mb-6 relative pb-4 after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-primary">
+      {children}
+    </h5>
+  );
 }
 
 export default function Footer() {
   return (
     <footer className="bg-secondary-dark text-white">
-      {/* Footer Top */}
+      {/* ── Top strip ─────────────────────────────────────── */}
+      <div className="bg-primary">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-white font-heading font-semibold text-sm">
+              Ready to start your next project? Get in touch with our experts today.
+            </p>
+            <Link
+              href="/contact-us"
+              className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-primary px-5 py-2 rounded-sm font-heading font-semibold text-sm hover:bg-secondary hover:text-white transition-colors"
+            >
+              <ArrowRight className="h-4 w-4" />
+              Contact Us Now
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Main footer body ──────────────────────────────── */}
       <div
         className="relative py-16"
         style={{
@@ -53,56 +75,55 @@ export default function Footer() {
           backgroundSize: 'auto',
         }}
       >
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {/* Logo & Disclaimer */}
-            <div>
-              <Link href="/" className="inline-block mb-6">
+        {/* Subtle dark overlay on pattern */}
+        <div className="absolute inset-0 bg-secondary/60" />
+
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+
+            {/* ── Col 1: Brand ──────────────────────────── */}
+            <div className="lg:col-span-1">
+              <Link href="/" className="inline-block mb-5">
                 <Image
                   src="/images/logos/logo-1.png"
                   alt="MHtracon"
-                  width={240}
-                  height={75}
-                  className="h-16 w-auto"
+                  width={200}
+                  height={65}
+                  className="h-14 w-auto brightness-0 invert"
                 />
               </Link>
-              <p className="text-white/70 text-sm font-body leading-relaxed text-justify mb-6">
-                <strong>Disclaimer:</strong> Before making any decision or taking any action, you
-                should consult a <strong>Webcon&apos;s</strong> professional.{' '}
-                <strong>Webcon Engineers Pvt. Ltd.</strong> is not responsible for any errors or
-                omissions, or for the results obtained from the use of this information.
+              <p className="text-white/65 text-sm font-body leading-relaxed mb-6">
+                MHtracon is a Riyadh-based multi-solutions company delivering integrated engineering, MEP, security, AI, and business solutions across Saudi Arabia.
               </p>
-              <ul className="flex items-center gap-3">
+
+              {/* Social icons */}
+              <div className="flex items-center gap-3 mb-6">
                 {socialLinks.map((link) => (
-                  <li key={link.icon}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full hover:bg-primary transition-colors"
-                      aria-label={link.label}
-                    >
-                      {getSocialIcon(link.icon)}
-                    </a>
-                  </li>
+                  <a
+                    key={link.icon}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 flex items-center justify-center bg-white/10 text-white rounded-full hover:bg-primary transition-colors"
+                    aria-label={link.label}
+                  >
+                    {getSocialIcon(link.icon)}
+                  </a>
                 ))}
-              </ul>
+              </div>
             </div>
 
-            {/* Useful Tags */}
+            {/* ── Col 2: Quick Links ────────────────────── */}
             <div>
-              <h5 className="font-heading font-semibold text-lg mb-6 relative">
-                Useful Tags
-                <span className="block w-8 h-0.5 bg-primary mt-3" />
-              </h5>
-              <ul className="space-y-3">
-                {footerTags.map((tag) => (
+              <FooterHeading>Quick Links</FooterHeading>
+              <ul className="space-y-2.5">
+                {footerQuickLinks.map((tag) => (
                   <li key={tag.label}>
                     <Link
                       href={tag.href}
-                      className="text-white/70 text-sm font-body hover:text-primary hover:pl-2 transition-all inline-flex items-center gap-2"
+                      className="text-white/65 text-sm font-body hover:text-primary hover:pl-2 transition-all inline-flex items-center gap-2 group"
                     >
-                      <ArrowRight className="h-3 w-3 text-primary" />
+                      <ArrowRight className="h-3 w-3 text-primary flex-shrink-0 transition-transform group-hover:translate-x-1" />
                       {tag.label}
                     </Link>
                   </li>
@@ -110,61 +131,108 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Work Gallery */}
+            {/* ── Col 3: Our Services ───────────────────── */}
             <div>
-              <h5 className="font-heading font-semibold text-lg mb-6 relative">
-                Work Gallery
-                <span className="block w-8 h-0.5 bg-primary mt-3" />
-              </h5>
-              <div className="grid grid-cols-4 gap-2">
-                {galleryItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    href={item.link}
-                    className="relative group overflow-hidden rounded-sm aspect-square"
-                  >
-                    <Image
-                      src={item.imageSrc}
-                      alt={`Gallery image ${index + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
-                      sizes="80px"
-                    />
-                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/60 transition-colors flex items-center justify-center">
-                      <ArrowRight className="h-4 w-4 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                  </Link>
+              <FooterHeading>Our Services</FooterHeading>
+              <ul className="space-y-2.5">
+                {footerServices.map((service) => (
+                  <li key={service.label}>
+                    <Link
+                      href={service.href}
+                      className="text-white/65 text-sm font-body hover:text-primary hover:pl-2 transition-all inline-flex items-center gap-2 group"
+                    >
+                      <ArrowRight className="h-3 w-3 text-primary flex-shrink-0 transition-transform group-hover:translate-x-1" />
+                      {service.label}
+                    </Link>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
+
+            {/* ── Col 4: Contact Info ───────────────────── */}
+            <div>
+              <FooterHeading>Contact Info</FooterHeading>
+              <ul className="space-y-5">
+                {/* Address */}
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 flex-shrink-0 bg-primary/20 rounded-lg flex items-center justify-center mt-0.5">
+                    <MapPin className="h-4 w-4 text-primary" />
+                  </div>
+                  <p className="text-white/65 text-sm font-body leading-relaxed">
+                    {companyInfo.address}
+                  </p>
+                </li>
+
+                {/* Phone */}
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 flex-shrink-0 bg-primary/20 rounded-lg flex items-center justify-center mt-0.5">
+                    <Phone className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    {phoneNumbers.map((p) => (
+                      <a
+                        key={p.href}
+                        href={p.href}
+                        className="block text-white/65 text-sm font-body hover:text-primary transition-colors"
+                      >
+                        {p.label}
+                      </a>
+                    ))}
+                  </div>
+                </li>
+
+                {/* Email */}
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 flex-shrink-0 bg-primary/20 rounded-lg flex items-center justify-center mt-0.5">
+                    <Mail className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    {emailAddresses.map((e) => (
+                      <a
+                        key={e.href}
+                        href={e.href}
+                        className="block text-white/65 text-sm font-body hover:text-primary transition-colors"
+                      >
+                        {e.label}
+                      </a>
+                    ))}
+                  </div>
+                </li>
+
+                {/* Working hours */}
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 flex-shrink-0 bg-primary/20 rounded-lg flex items-center justify-center mt-0.5">
+                    <Clock className="h-4 w-4 text-primary" />
+                  </div>
+                  <p className="text-white/65 text-sm font-body leading-relaxed">
+                    {companyInfo.workingHours}
+                  </p>
+                </li>
+              </ul>
+            </div>
+
           </div>
         </div>
       </div>
 
-      {/* Footer Bottom */}
-      <div className="border-t border-white/10 bg-secondary-dark">
+      {/* ── Footer Bottom ─────────────────────────────────── */}
+      <div className="border-t border-white/10 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between py-5 gap-3">
-            <p className="text-white/60 text-sm font-body">
-              Copyright © {new Date().getFullYear()}{' '}
+            <p className="text-white/50 text-sm font-body">
+              Copyright &copy; {new Date().getFullYear()}{' '}
               <a
-                href="https://webconengineers.com"
+                href="https://mhtracon.com"
                 className="text-primary hover:text-white transition-colors"
               >
-                webconengineers.com
+                MH Tracon
               </a>
               . All Rights Reserved.
             </p>
-            <p className="text-white/60 text-sm font-body">
-              Powered By:{' '}
-              <a
-                href="https://www.trgsoftwareindia.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:text-white transition-colors"
-              >
-                TRG Software Consultancy
-              </a>
+            <p className="text-white/50 text-sm font-body">
+              {companyInfo.disclaimer.length > 80
+                ? companyInfo.disclaimer.slice(0, 80) + '…'
+                : companyInfo.disclaimer}
             </p>
           </div>
         </div>

@@ -10,23 +10,19 @@ import { cn } from '@/lib/utils';
 
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(1);
 
   const goToSlide = useCallback(
     (index: number) => {
-      setDirection(index > currentSlide ? 1 : -1);
       setCurrentSlide(index);
     },
-    [currentSlide]
+    []
   );
 
   const nextSlide = useCallback(() => {
-    setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
   }, []);
 
   const prevSlide = useCallback(() => {
-    setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + bannerSlides.length) % bannerSlides.length);
   }, []);
 
@@ -39,31 +35,30 @@ export default function HeroBanner() {
   const slide = bannerSlides[currentSlide];
 
   const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? '100%' : '-100%',
+    enter: {
       opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
+      scale: 0.96
     },
-    exit: (dir: number) => ({
-      x: dir > 0 ? '-100%' : '100%',
+    center: {
+      opacity: 1,
+      scale: 1,
+    },
+    exit: {
       opacity: 0,
-    }),
+      scale: 1.08,
+    },
   };
 
   return (
     <section className="relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[750px] overflow-hidden bg-secondary-dark">
-      <AnimatePresence initial={false} custom={direction} mode="wait">
+      <AnimatePresence initial={false} mode="sync">
         <motion.div
           key={currentSlide}
-          custom={direction}
           variants={slideVariants}
           initial="enter"
           animate="center"
           exit="exit"
-          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
           className="absolute inset-0"
         >
           {/* Background Image */}
@@ -90,9 +85,14 @@ export default function HeroBanner() {
                 <h6 className="text-primary font-heading font-semibold text-sm sm:text-base uppercase tracking-widest mb-3 sm:mb-4">
                   {slide.subtitle}
                 </h6>
-                <h1 className="text-white font-heading font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight mb-6 sm:mb-8">
+                <h1 className="text-white font-heading font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight mb-4 sm:mb-5">
                   {slide.title}
                 </h1>
+                {slide.description && (
+                  <p className="text-white/85 font-body text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-xl">
+                    {slide.description}
+                  </p>
+                )}
                 <Link
                   href={slide.buttonLink}
                   className="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-sm font-heading font-medium text-sm uppercase tracking-wider hover:bg-primary-dark transition-colors group"

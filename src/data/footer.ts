@@ -1,13 +1,26 @@
 import type { FooterTag, GalleryItem } from '@/types';
 
-export const footerTags: FooterTag[] = [
-  { label: 'PEB Engineering Company In Kolkata', href: '/project/peb-structure' },
-  { label: 'PEB Projects Consultants In Kolkata', href: '/project/peb-structure' },
-  { label: 'PEB Structures Engineering In Kolkata', href: '/project/peb-structure' },
-  { label: 'Civil Construction Company In Kolkata', href: '/project/civil-construction' },
-  { label: 'Civil Engineering Company In Kolkata', href: '/project/civil-construction' },
-  { label: 'Industrial Engineering Company In Kolkata', href: '/project/civil-construction' },
+export const footerQuickLinks: FooterTag[] = [
+  { label: 'Home', href: '/' },
+  { label: 'About Company', href: '/about-company' },
+  { label: 'Our Services', href: '#' },
+  { label: 'Ongoing Projects', href: '/project/ongoing' },
+  { label: 'Contact Us', href: '/contact-us' },
 ];
+
+export const footerServices: FooterTag[] = [
+  { label: 'Engineering & Construction', href: '/project/civil-construction' },
+  { label: 'MEP Solutions', href: '#' },
+  { label: 'Security Solutions', href: '#' },
+  { label: 'AI & Software Development', href: '#' },
+  { label: 'Interior & Exterior Design', href: '#' },
+  { label: 'Networking & Infrastructure', href: '#' },
+  { label: 'Corporate Gifts & Uniforms', href: '#' },
+  { label: 'Heavy Machinery & Automotive', href: '#' },
+];
+
+// Keep for backward compatibility — not used in new footer
+export const footerTags: FooterTag[] = footerQuickLinks;
 
 export const galleryItems: GalleryItem[] = [
   { imageSrc: '/images/gallery/footer-gallery-4.jpg', link: '/project/peb-structure' },

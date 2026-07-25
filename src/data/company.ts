@@ -8,7 +8,7 @@ export const companyInfo: CompanyInfo = {
   workingHours: 'Mon - Sat: 10.00AM to 07.00PM',
   yearsOfExperience: 5,
   aboutText:
-    'MHtracon is a Riyadh-based multi-solutions company delivering innovative engineering, MEP, security, fire & safety, networking, AI & software, interior & exterior design, and business solutions. We are committed to providing reliable, high-quality services that help businesses grow through innovation, expertise, and customer-focused solutions.',
+    'is a Riyadh-based multi-solutions company delivering innovative engineering, MEP, security, fire & safety, networking, AI & software, interior & exterior design, and business solutions. We are committed to providing reliable, high-quality services that help businesses grow through innovation, expertise, and customer-focused solutions.',
   vision:
     'To become a trusted leader in integrated engineering, technology, and business solutions across Saudi Arabia and the Middle East, driving innovation and sustainable growth.',
   mission:
@@ -24,6 +24,10 @@ export const phoneNumbers = [
 export const emailAddresses = [
   { label: 'info@mhtracon.com', href: 'mailto:info@mhtracon.com' },
   { label: 'mansoor@mhtracon.com', href: 'mailto:mansoor@mhtracon.com' },
+];
+
+export const address = [
+  { label: 'AL Jandriya Riyadh , 13611, Saudi Arabia', href: 'https://maps.app.goo.gl/gQjS2x1d1KjX1Y2Z9' },
 ];
 
 export const socialLinks = [

@@ -1,12 +1,79 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { clientLogos } from '@/data/clients';
 
 export default function ClientsCarousel() {
-  // Duplicate the logos for seamless infinite scroll
-  const duplicatedLogos = [...clientLogos, ...clientLogos];
+  // Triple the list so the reset loop is invisible
+  const duplicatedLogos = [...clientLogos, ...clientLogos, ...clientLogos];
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isPaused = useRef(false);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const scrollStartX = useRef(0);
+
+  /* ── Auto-scroll via rAF ─────────────────────────── */
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let frame: number;
+
+    const tick = () => {
+      if (!isPaused.current && !isDragging.current && el) {
+        el.scrollLeft += 0.8;
+        // Seamless reset: when we've scrolled past the first "copy"
+        const oneThird = el.scrollWidth / 3;
+        if (el.scrollLeft >= oneThird * 2) {
+          el.scrollLeft -= oneThird;
+        }
+      }
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  /* ── Mouse drag handlers ─────────────────────────── */
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    isPaused.current = true;
+    dragStartX.current = e.clientX;
+    scrollStartX.current = scrollRef.current?.scrollLeft ?? 0;
+    e.preventDefault();
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    scrollRef.current.scrollLeft = scrollStartX.current - (e.clientX - dragStartX.current);
+  };
+
+  const onMouseUp = () => {
+    isDragging.current = false;
+    isPaused.current = false;
+  };
+
+  /* ── Touch drag handlers ─────────────────────────── */
+  const onTouchStart = (e: React.TouchEvent) => {
+    isDragging.current = true;
+    isPaused.current = true;
+    dragStartX.current = e.touches[0].clientX;
+    scrollStartX.current = scrollRef.current?.scrollLeft ?? 0;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    scrollRef.current.scrollLeft =
+      scrollStartX.current - (e.touches[0].clientX - dragStartX.current);
+  };
+
+  const onTouchEnd = () => {
+    isDragging.current = false;
+    isPaused.current = false;
+  };
 
   return (
     <section className="py-16 lg:py-20 bg-gray-50">
@@ -26,34 +93,35 @@ export default function ClientsCarousel() {
         </div>
       </div>
 
-      {/* Infinite Marquee */}
-      <div className="overflow-hidden">
-        <motion.div
-          className="flex items-center gap-8"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{
-            x: {
-              duration: 30,
-              repeat: Infinity,
-              ease: 'linear',
-            },
-          }}
-        >
+      {/* Scrollable carousel strip */}
+      <div
+        ref={scrollRef}
+        className="overflow-x-auto cursor-grab active:cursor-grabbing select-none scrollbar-hide"
+        onMouseEnter={() => { isPaused.current = true; }}
+        onMouseLeave={() => { isPaused.current = false; isDragging.current = false; }}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <div className="flex gap-5 px-6 py-2" style={{ width: 'max-content' }}>
           {duplicatedLogos.map((logo, index) => (
             <div
               key={`${logo.id}-${index}`}
-              className="flex-shrink-0 w-[160px] h-[80px] flex items-center justify-center bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow"
+              className="flex-shrink-0 w-[180px] h-[90px] flex items-center justify-center bg-white rounded-lg shadow-sm p-1 hover:shadow-md transition-shadow"
             >
               <Image
                 src={logo.imageSrc}
                 alt={logo.alt}
-                width={140}
-                height={60}
-                className="max-h-14 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
+                width={260}
+                height={130}
+                className="max-h-24 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
               />
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

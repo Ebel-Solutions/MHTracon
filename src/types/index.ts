@@ -10,6 +10,7 @@ export interface BannerSlide {
   id: number;
   subtitle: string;
   title: string;
+  description?: string;
   buttonText: string;
   buttonLink: string;
   bgImage: string;
