@@ -13,6 +13,17 @@
   /* Fonts */
   --font-heading: var(--font-lexend), sans-serif;
   --font-body: var(--font-lato), sans-serif;
+
+  /* Container — constrains content width on large screens */
+  --container-3xl: 1400px;
+}
+
+/* Constrain container width on large screens */
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Base styles */
@@ -36,6 +47,8 @@ h6 {
 
 /* Smooth scrolling & scaling stability */
 html {
+  font-size: 16px;
+  /* Anchor rem units — prevents Chrome/Edge divergence under Windows DPI scaling */
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
@@ -86,9 +99,13 @@ html {
 
 /* Hide scrollbar — cross-browser */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE / Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  /* IE / Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;             /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }

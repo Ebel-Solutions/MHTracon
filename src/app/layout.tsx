@@ -16,7 +16,8 @@ const lexend = Lexend({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-lexend',
-  display: 'swap',
+  display: 'optional',
+  preload: true,
 });
 
 const lato = Lato({
@@ -24,7 +25,8 @@ const lato = Lato({
   weight: ['300', '400', '700', '900'],
   style: ['normal', 'italic'],
   variable: '--font-lato',
-  display: 'swap',
+  display: 'optional',
+  preload: true,
 });
 
 export const metadata: Metadata = {
