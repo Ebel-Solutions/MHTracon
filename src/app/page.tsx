@@ -5,7 +5,7 @@ import ProjectsCarousel from '@/components/sections/ProjectsCarousel';
 import CtaBanner from '@/components/sections/CtaBanner';
 import FeaturesGrid from '@/components/sections/FeaturesGrid';
 import ClientsCarousel from '@/components/sections/ClientsCarousel';
-import ContactInfoBar from '@/components/sections/ContactInfoBar';
+
 
 export default function HomePage() {
   return (
@@ -57,8 +57,6 @@ export default function HomePage() {
       {/* Clients Logo Carousel */}
       <ClientsCarousel />
 
-      {/* Contact Information Bar */}
-      <ContactInfoBar />
     </>
   );
 }

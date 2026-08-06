@@ -45,7 +45,7 @@ export default function ProjectsCarousel() {
       : visibleProjects;
 
   return (
-    <section className="py-20 lg:py-28 bg-secondary relative overflow-hidden">
+    <section className="projects-carousel py-20 lg:py-28 bg-secondary relative overflow-hidden">
       {/* Background pattern */}
       <div
         className="absolute inset-0 opacity-5"

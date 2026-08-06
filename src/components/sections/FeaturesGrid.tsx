@@ -36,7 +36,7 @@ const itemVariants = {
 
 export default function FeaturesGrid() {
   return (
-    <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
+    <section className="features-grid py-20 lg:py-28 bg-white relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-1 h-full bg-primary hidden lg:block" />
       <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />

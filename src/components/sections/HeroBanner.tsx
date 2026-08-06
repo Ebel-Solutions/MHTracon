@@ -50,7 +50,7 @@ export default function HeroBanner() {
   };
 
   return (
-    <section className="relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[750px] overflow-hidden bg-secondary-dark">
+    <section className="hero-banner relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[750px] overflow-hidden bg-secondary-dark">
       <AnimatePresence initial={false} mode="sync">
         <motion.div
           key={currentSlide}

@@ -13,7 +13,7 @@ const trustPoints = [
 export default function CtaBanner() {
   return (
     <section
-      className="relative py-20 lg:py-28 bg-cover bg-center"
+      className="cta-banner relative py-20 lg:py-28 bg-cover bg-center"
       style={{ backgroundImage: 'url(/images/background/cta-bg.png)' }}
     >
       {/* Layered overlay — left dark, right slightly lighter */}

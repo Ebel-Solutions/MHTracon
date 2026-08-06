@@ -8,7 +8,7 @@ export const bannerSlides: BannerSlide[] = [
     description:
       'From workwear to branded corporate attire, we supply high-quality uniforms tailored to your industry, identity, and workforce needs.',
     buttonText: 'Get Started',
-    buttonLink: '/project/peb-structure',
+    buttonLink: '#',
     bgImage: '/images/banner/banner-1.png',
   },
   {
@@ -18,7 +18,7 @@ export const bannerSlides: BannerSlide[] = [
     description:
       'Transform your space with our end-to-end interior and exterior design solutions — from concept to completion, we bring your vision to life.',
     buttonText: 'Check Projects',
-    buttonLink: '/project/peb-structure',
+    buttonLink: '#',
     bgImage: '/images/banner/banner-2.png',
   },
   {
@@ -28,7 +28,7 @@ export const bannerSlides: BannerSlide[] = [
     description:
       'Expert mechanical, electrical, and plumbing services designed to meet the demands of modern commercial and industrial projects across Saudi Arabia.',
     buttonText: 'Know More',
-    buttonLink: '/project/civil-construction',
+    buttonLink: '#',
     bgImage: '/images/banner/banner-3.png',
   },
   {
@@ -38,7 +38,7 @@ export const bannerSlides: BannerSlide[] = [
     description:
       'Accelerate your business with cutting-edge AI, custom software development, and digital transformation services built for the future.',
     buttonText: 'Know More',
-    buttonLink: '/project/civil-construction',
+    buttonLink: '#',
     bgImage: '/images/banner/banner-4.png',
   },
   {
@@ -48,7 +48,7 @@ export const bannerSlides: BannerSlide[] = [
     description:
       'Protect what matters most with our integrated security systems — CCTV, access control, fire alarms, and more, delivered by certified experts.',
     buttonText: 'Know More',
-    buttonLink: '/project/civil-construction',
+    buttonLink: '#',
     bgImage: '/images/banner/banner-5.png',
   },
   {
@@ -58,7 +58,7 @@ export const bannerSlides: BannerSlide[] = [
     description:
       'Fully equip your workplace with premium office supplies, furniture, and consumables — sourced, delivered, and managed for your convenience.',
     buttonText: 'Know More',
-    buttonLink: '/project/civil-construction',
+    buttonLink: '#',
     bgImage: '/images/banner/banner-6.png',
   },
   {
@@ -68,7 +68,7 @@ export const bannerSlides: BannerSlide[] = [
     description:
       'Make a lasting impression with curated corporate gifts, branded merchandise, and custom packaging solutions for every occasion and budget.',
     buttonText: 'Know More',
-    buttonLink: '/project/civil-construction',
+    buttonLink: '#',
     bgImage: '/images/banner/banner-7.png',
   },
 ];

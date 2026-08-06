@@ -76,7 +76,7 @@ export default function ClientsCarousel() {
   };
 
   return (
-    <section className="py-16 lg:py-20 bg-gray-50">
+    <section className="clients-carousel pt-16 pb-50 lg:py-25 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-10">

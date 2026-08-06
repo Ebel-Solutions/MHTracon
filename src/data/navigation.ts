@@ -9,9 +9,8 @@ export const navigationItems: NavItem[] = [
     label: 'Our Services',
     href: '#',
     children: [
-      { label: 'Ongoing', href: '/project/ongoing' },
-      { label: 'PEB Structure', href: '/project/peb-structure' },
-      { label: 'Civil Construction', href: '/project/civil-construction' },
+      { label: 'Uniform Services', href: '/services/uniform-services' },
+      { label: 'Interior & Exterior Design', href: '/services/interior-exterior' },
     ],
   },
   {

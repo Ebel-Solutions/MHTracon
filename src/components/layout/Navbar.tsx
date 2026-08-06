@@ -32,7 +32,7 @@ export default function Navbar() {
     <>
       <nav
         className={cn(
-          'w-full z-50 transition-all duration-300 bg-white',
+          'navbar w-full z-50 transition-all duration-300 bg-white',
           isScrolled ? 'fixed top-0 left-0 shadow-lg' : 'relative'
         )}
       >

@@ -3,7 +3,7 @@ import { companyInfo } from '@/data/company';
 
 export default function TopInfoBar() {
   return (
-    <div className="bg-secondary text-white hidden lg:block">
+    <div className="top-info-bar bg-secondary text-white hidden lg:block">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-2.5">
           <ul className="flex items-center gap-6 text-sm">

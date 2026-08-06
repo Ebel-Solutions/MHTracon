@@ -64,7 +64,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
       {/* Backdrop */}
       <div
         className={cn(
-          'fixed inset-0 bg-black/60 z-[998] transition-opacity duration-300 lg:hidden',
+          'mobile-menu-backdrop fixed inset-0 bg-black/60 z-[998] transition-opacity duration-300 lg:hidden',
           open ? 'opacity-100 visible' : 'opacity-0 invisible'
         )}
         onClick={onClose}
@@ -74,7 +74,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
       {/* Menu Panel */}
       <div
         className={cn(
-          'fixed top-0 right-0 w-[320px] max-w-[85vw] h-full bg-secondary-dark z-[999] transition-transform duration-300 overflow-y-auto lg:hidden',
+          'mobile-menu-panel fixed top-0 right-0 w-[320px] max-w-[85vw] h-full bg-secondary-dark z-[999] transition-transform duration-300 overflow-y-auto lg:hidden',
           open ? 'translate-x-0' : 'translate-x-full'
         )}
         role="dialog"

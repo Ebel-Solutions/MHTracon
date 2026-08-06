@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { ArrowRight, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { companyInfo, socialLinks, phoneNumbers, emailAddresses } from '@/data/company';
 import { footerQuickLinks, footerServices } from '@/data/footer';
+import ContactInfoBar from '@/components/sections/ContactInfoBar';
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -47,28 +48,13 @@ function FooterHeading({ children }: { children: React.ReactNode }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary-dark text-white">
-      {/* ── Top strip ─────────────────────────────────────── */}
-      <div className="bg-primary">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-white font-heading font-semibold text-sm">
-              Ready to start your next project? Get in touch with our experts today.
-            </p>
-            <Link
-              href="/contact-us"
-              className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-primary px-5 py-2 rounded-sm font-heading font-semibold text-sm hover:bg-secondary hover:text-white transition-colors"
-            >
-              <ArrowRight className="h-4 w-4" />
-              Contact Us Now
-            </Link>
-          </div>
-        </div>
-      </div>
+    <footer className="site-footer relative bg-secondary-dark text-white overflow-visible">
+      {/* ── Contact Info Card — straddles section/footer boundary */}
+      <ContactInfoBar />
 
       {/* ── Main footer body ──────────────────────────────── */}
       <div
-        className="relative py-16"
+        className="relative pt-50 md:pt-24 pb-16"
         style={{
           backgroundImage: 'url(/images/shape/shape-4.png)',
           backgroundRepeat: 'repeat',

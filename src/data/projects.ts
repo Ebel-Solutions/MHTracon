@@ -7,7 +7,7 @@ export const projects: Project[] = [
     category: 'Interior Design',
     categorySlug: 'interior-exterior',
     imageSrc: '/images/banner/banner-2.png',
-    link: '/project/ongoing',
+    link: '#',
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const projects: Project[] = [
     category: 'MEP Solutions',
     categorySlug: 'mep',
     imageSrc: '/images/banner/banner-3.png',
-    link: '/project/ongoing',
+    link: '#',
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     category: 'Security',
     categorySlug: 'security',
     imageSrc: '/images/banner/banner-5.png',
-    link: '/project/ongoing',
+    link: '#',
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     category: 'AI & Software',
     categorySlug: 'ai-software',
     imageSrc: '/images/banner/banner-4.png',
-    link: '/project/ongoing',
+    link: '#',
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ export const projects: Project[] = [
     category: 'Interior Design',
     categorySlug: 'interior-exterior',
     imageSrc: '/images/banner/banner-1.png',
-    link: '/project/ongoing',
+    link: '#',
   },
   {
     id: 6,
@@ -47,6 +47,6 @@ export const projects: Project[] = [
     category: 'Uniforms',
     categorySlug: 'uniforms',
     imageSrc: '/images/banner/banner-6.png',
-    link: '/project/ongoing',
+    link: '#',
   },
 ];
