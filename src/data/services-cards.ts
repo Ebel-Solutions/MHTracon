@@ -28,7 +28,7 @@ export const servicesData: ServiceCard[] = [
       'Complete Mechanical, Electrical & Plumbing services engineered to the highest standards for commercial, industrial, and institutional projects across Saudi Arabia.',
     tag: 'Engineering',
     color: '#2a3247',
-    link: '#',
+    link: '/services/mep',
   },
   {
     id: 'ai-software',

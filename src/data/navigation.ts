@@ -11,6 +11,7 @@ export const navigationItems: NavItem[] = [
     children: [
       { label: 'Uniform Services', href: '/services/uniform-services' },
       { label: 'Interior & Exterior Design', href: '/services/interior-exterior' },
+      { label: 'MEP (Mechanical, Electrical & Plumbing)', href: '/services/mep' },
     ],
   },
   {

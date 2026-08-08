@@ -8,7 +8,7 @@ export const footerQuickLinks: FooterTag[] = [
 ];
 
 export const footerServices: FooterTag[] = [
-  { label: 'MEP Solutions', href: '#' },
+  { label: 'MEP Solutions', href: '/services/mep' },
   { label: 'Security Solutions', href: '#' },
   { label: 'AI & Software Development', href: '#' },
   { label: 'Interior & Exterior Design', href: '#' },
