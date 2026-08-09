@@ -9,11 +9,11 @@ export const footerQuickLinks: FooterTag[] = [
 
 export const footerServices: FooterTag[] = [
   { label: 'MEP Solutions', href: '/services/mep' },
-  { label: 'Security Solutions', href: '#' },
+  { label: 'Security Solutions', href: '/services/security-solutions' },
   { label: 'AI & Software Development', href: '#' },
-  { label: 'Interior & Exterior Design', href: '#' },
+  { label: 'Interior & Exterior Design', href: '/services/interior-exterior' },
   { label: 'Networking & Infrastructure', href: '#' },
-  { label: 'Corporate Gifts & Uniforms', href: '#' },
+  { label: 'Corporate Gifts & Uniforms', href: '/services/corporate-gifts' },
   { label: 'Heavy Machinery & Automotive', href: '#' },
 ];
 

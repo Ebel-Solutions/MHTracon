@@ -37,7 +37,6 @@ export default function UniformCTA() {
       headlineHighlight="For Success?"
       subtext="Join 500+ organisations across Saudi Arabia that trust MH Tracon for their uniform needs. Let's create something exceptional together."
       backgroundImage="/images/uniform/cta-bg.png"
-      contactLine="info@mhtracon.com • +966 506 030 311 • Riyadh, Saudi Arabia"
       className="uniform-cta"
     />
   );

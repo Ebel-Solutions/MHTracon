@@ -18,7 +18,7 @@ export const servicesData: ServiceCard[] = [
       'Transform spaces with our end-to-end design solutions — from concept and 3D visualization to final execution for commercial, hospitality, and industrial environments.',
     tag: 'Design',
     color: '#f16d2b',
-    link: '#',
+    link: '/services/interior-exterior',
   },
   {
     id: 'mep',
@@ -48,7 +48,7 @@ export const servicesData: ServiceCard[] = [
       'Integrated security ecosystems — CCTV, access control, fire & safety systems, and alarm management — installed and maintained by certified specialists.',
     tag: 'Safety',
     color: '#2a3247',
-    link: '#',
+    link: '/services/security-solutions',
   },
   {
     id: 'office-essentials',
@@ -58,7 +58,7 @@ export const servicesData: ServiceCard[] = [
       'Comprehensive workplace supply solutions — furniture, consumables, stationery, and IT accessories — sourced, delivered, and managed on your schedule.',
     tag: 'Business',
     color: '#f16d2b',
-    link: '#',
+    link: '/services/office-essentials',
   },
   {
     id: 'corporate-gifts',
@@ -68,7 +68,7 @@ export const servicesData: ServiceCard[] = [
       'Curated corporate gifting, branded merchandise, and custom packaging that leave a lasting impression at every touchpoint — events, client visits, and seasonal campaigns.',
     tag: 'Branding',
     color: '#2a3247',
-    link: '#',
+    link: '/services/corporate-gifts',
   },
   {
     id: 'uniforms',
@@ -78,6 +78,6 @@ export const servicesData: ServiceCard[] = [
       'Premium corporate and industrial uniforms tailored to your brand identity and operational requirements — from design and sampling to bulk manufacturing and delivery.',
     tag: 'Apparel',
     color: '#f16d2b',
-    link: '#',
+    link: '/services/uniform-services',
   },
 ];

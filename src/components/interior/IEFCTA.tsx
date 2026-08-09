@@ -37,7 +37,6 @@ export default function IEFCTA() {
       headlineHighlight="Extraordinary?"
       subtext="Join 350+ completed projects across Saudi Arabia. Let MH Tracon turn your architectural vision into a precision-engineered reality."
       backgroundImage="/images/interior/cta-bg.png"
-      contactLine="info@mhtracon.com • +966 506 030 311 • Riyadh, Saudi Arabia"
       className="ie-cta"
     />
   );

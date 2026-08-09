@@ -44,7 +44,6 @@ export default function MEPCTA() {
       headlineHighlight="Something Great?"
       subtext="280+ completed MEP projects across Saudi Arabia. One engineering partner for mechanical, electrical, plumbing, fire protection, and beyond."
       backgroundImage="/images/mep/cta-bg.png"
-      contactLine="info@mhtracon.com • +966 506 030 311 • Riyadh, Saudi Arabia"
       className="mep-cta"
     />
   );
