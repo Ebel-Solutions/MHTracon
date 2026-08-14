@@ -1,9 +1,9 @@
-import { MapPin, Phone, Mail } from 'lucide-react';
+﻿import { MapPin, Phone, Mail } from 'lucide-react';
 import { phoneNumbers, emailAddresses, address } from '@/data/company';
 
 export default function ContactInfoBar() {
   return (
-    <div className="cib-root absolute top-0 left-0 right-0 -translate-y-1/2 z-20">
+    <div className="cib-root absolute top-26 md:top-0 left-0 right-0 -translate-y-1/2 z-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/20 bg-primary rounded-lg shadow-2xl overflow-hidden">
 
@@ -83,3 +83,7 @@ export default function ContactInfoBar() {
     </div>
   );
 }
+
+
+
+

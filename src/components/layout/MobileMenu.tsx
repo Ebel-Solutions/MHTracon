@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -38,24 +39,53 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
-export default function MobileMenu({ open, onClose }: MobileMenuProps) {
+function MobileMenuContent({ open, onClose }: MobileMenuProps) {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const pathname = usePathname();
 
+  // Lock body scroll when menu is open — iOS-safe technique
+  useEffect(() => {
+    if (open) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [open]);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!open) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [open, onClose]);
+
   const toggleExpand = (label: string) => {
-    setExpandedItem(expandedItem === label ? null : label);
+    setExpandedItem(prev => prev === label ? null : label);
   };
 
   const getSocialIcon = (iconName: string) => {
     switch (iconName) {
-      case 'facebook':
-        return <FacebookIcon className="h-4 w-4" />;
-      case 'twitter':
-        return <TwitterIcon className="h-4 w-4" />;
-      case 'linkedin':
-        return <LinkedinIcon className="h-4 w-4" />;
-      default:
-        return null;
+      case 'facebook': return <FacebookIcon className="h-4 w-4" />;
+      case 'twitter': return <TwitterIcon className="h-4 w-4" />;
+      case 'linkedin': return <LinkedinIcon className="h-4 w-4" />;
+      default: return null;
     }
   };
 
@@ -63,28 +93,45 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
     <>
       {/* Backdrop */}
       <div
-        className={cn(
-          'mobile-menu-backdrop fixed inset-0 bg-black/60 z-[998] transition-opacity duration-300 lg:hidden',
-          open ? 'opacity-100 visible' : 'opacity-0 invisible'
-        )}
         onClick={onClose}
         aria-hidden="true"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          zIndex: 99998,
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? 'auto' : 'none',
+          transition: 'opacity 300ms ease',
+        }}
       />
 
-      {/* Menu Panel */}
+      {/* Slide-in Panel */}
       <div
-        className={cn(
-          'mobile-menu-panel fixed top-0 right-0 w-[320px] max-w-[85vw] h-full bg-secondary-dark z-[999] transition-transform duration-300 overflow-y-auto lg:hidden',
-          open ? 'translate-x-0' : 'translate-x-full'
-        )}
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          width: '320px',
+          maxWidth: '88vw',
+          height: '100dvh' as string,
+          backgroundColor: 'var(--color-secondary-dark)',
+          zIndex: 99999,
+          overflowY: 'auto',
+          overscrollBehavior: 'contain',
+          transform: open ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 300ms ease-in-out',
+          WebkitOverflowScrolling: 'touch',
+        } as React.CSSProperties}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"
+          style={{ touchAction: 'manipulation' }}
+          className="absolute top-4 right-4 w-11 h-11 flex items-center justify-center bg-primary text-white rounded-full active:scale-95 transition-all"
           aria-label="Close mobile menu"
         >
           <X className="h-5 w-5" />
@@ -96,15 +143,15 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
             <Image
               src="/images/logos/logo-1.png"
               alt="MHtracon"
-              width={240}
-              height={75}
-              className="h-16 w-auto"
+              width={200}
+              height={65}
+              className="h-12 w-auto"
             />
           </Link>
         </div>
 
         {/* Navigation Links */}
-        <nav className="py-4">
+        <nav className="py-2">
           <ul>
             {navigationItems.map((item) => (
               <li key={item.label} className="border-b border-white/10">
@@ -112,33 +159,32 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                   <>
                     <button
                       onClick={() => toggleExpand(item.label)}
-                      className={cn(
-                        'w-full flex items-center justify-between px-6 py-3.5 text-white text-sm font-heading uppercase tracking-wider',
-                        'hover:text-primary transition-colors'
-                      )}
+                      style={{ touchAction: 'manipulation' }}
+                      className="w-full flex items-center justify-between px-6 py-4 text-white text-sm font-heading uppercase tracking-wider hover:text-primary active:text-primary transition-colors"
                       aria-expanded={expandedItem === item.label}
                     >
                       {item.label}
-                      {expandedItem === item.label ? (
-                        <ChevronUp className="h-4 w-4" />
-                      ) : (
-                        <ChevronDown className="h-4 w-4" />
-                      )}
+                      {expandedItem === item.label
+                        ? <ChevronUp className="h-4 w-4 flex-shrink-0" />
+                        : <ChevronDown className="h-4 w-4 flex-shrink-0" />
+                      }
                     </button>
                     <ul
                       className={cn(
-                        'overflow-hidden transition-all duration-300 bg-black/20',
-                        expandedItem === item.label ? 'max-h-60' : 'max-h-0'
+                        'overflow-hidden transition-all duration-300',
+                        expandedItem === item.label ? 'max-h-[28rem]' : 'max-h-0'
                       )}
+                      style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
                     >
                       {item.children.map((child) => (
                         <li key={child.label}>
                           <Link
                             href={child.href}
                             onClick={onClose}
+                            style={{ touchAction: 'manipulation' }}
                             className={cn(
-                              'block pl-10 pr-6 py-3 text-white/80 text-sm font-body hover:text-primary transition-colors',
-                              pathname === child.href && 'text-primary'
+                              'block pl-10 pr-6 py-3.5 text-white/80 text-sm font-body hover:text-primary active:text-primary transition-colors',
+                              pathname === child.href && 'text-primary font-semibold'
                             )}
                           >
                             {child.label}
@@ -151,9 +197,10 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                   <Link
                     href={item.href}
                     onClick={onClose}
+                    style={{ touchAction: 'manipulation' }}
                     className={cn(
-                      'block px-6 py-3.5 text-white text-sm font-heading uppercase tracking-wider',
-                      'hover:text-primary transition-colors',
+                      'block px-6 py-4 text-white text-sm font-heading uppercase tracking-wider',
+                      'hover:text-primary active:text-primary transition-colors',
                       pathname === item.href && 'text-primary'
                     )}
                   >
@@ -167,18 +214,23 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
 
         {/* Contact Info */}
         <div className="px-6 py-4 border-t border-white/10">
-          <h4 className="text-white font-heading font-semibold text-lg mb-3">Contact Info</h4>
+          <h4 className="text-white font-heading font-semibold text-base mb-3">Contact Info</h4>
           <ul className="space-y-2 text-white/70 text-sm font-body">
-            <li>{companyInfo.address}</li>
+            <li className="leading-relaxed">{companyInfo.address}</li>
             <li>
-              <a href={`tel:${companyInfo.phone}`} className="hover:text-primary transition-colors">
+              <a
+                href={`tel:${companyInfo.phone}`}
+                style={{ touchAction: 'manipulation' }}
+                className="hover:text-primary active:text-primary transition-colors"
+              >
                 {companyInfo.phone}
               </a>
             </li>
             <li>
               <a
                 href={`mailto:${companyInfo.email}`}
-                className="hover:text-primary transition-colors"
+                style={{ touchAction: 'manipulation' }}
+                className="hover:text-primary active:text-primary transition-colors break-all"
               >
                 {companyInfo.email}
               </a>
@@ -195,7 +247,8 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 flex items-center justify-center bg-white/10 text-white rounded hover:bg-primary hover:text-white transition-colors"
+                  style={{ touchAction: 'manipulation' }}
+                  className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded hover:bg-primary active:bg-primary-dark transition-colors"
                   aria-label={link.label}
                 >
                   {getSocialIcon(link.icon)}
@@ -206,5 +259,22 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
         </div>
       </div>
     </>
+  );
+}
+
+// Portal wrapper — mounts menu directly on document.body to escape all
+// parent stacking contexts (header z-index, transforms, will-change, etc.)
+export default function MobileMenu({ open, onClose }: MobileMenuProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  return createPortal(
+    <MobileMenuContent open={open} onClose={onClose} />,
+    document.body
   );
 }

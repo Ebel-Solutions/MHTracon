@@ -120,17 +120,17 @@ export default function ServiceHero({
                 {desktopDescription}
               </p>
 
-              <div className="flex flex-row lg:flex-col gap-3">
+              <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
                 <Link
                   href={primaryCTA.href}
-                  className="inline-flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-sm font-heading font-semibold text-sm hover:bg-primary-dark transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-sm font-heading font-semibold text-sm hover:bg-primary-dark transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 w-full sm:w-auto"
                 >
                   <ArrowRight className="h-3.5 w-3.5" />
                   {primaryCTA.label}
                 </Link>
                 <a
                   href={secondaryCTA.href}
-                  className="inline-flex items-center justify-center gap-2 border border-white/30 text-white px-6 py-3 rounded-sm font-heading font-semibold text-sm hover:border-white hover:bg-white/10 transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-2 border border-white/30 text-white px-6 py-3 rounded-sm font-heading font-semibold text-sm hover:border-white hover:bg-white/10 transition-all duration-300 w-full sm:w-auto"
                 >
                   {secondaryCTA.label}
                   <ChevronDown className="h-3.5 w-3.5" />

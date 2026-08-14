@@ -65,11 +65,11 @@ export default function ServiceCTA({
               {sectionLabel}
             </span>
           </div>
-          <h2 className="font-heading font-bold text-white text-4xl lg:text-5xl xl:text-6xl mb-4">
+          <h2 className="font-heading font-bold text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-4">
             {headlineStart}{' '}
             <span className="text-primary">{headlineHighlight}</span>
           </h2>
-          <p className="font-body text-white/65 text-xl max-w-2xl mx-auto">{subtext}</p>
+          <p className="font-body text-white/65 text-base sm:text-lg xl:text-xl max-w-2xl mx-auto">{subtext}</p>
         </motion.div>
 
         {/* CTA Cards */}
@@ -86,7 +86,7 @@ export default function ServiceCTA({
               >
                 <Link
                   href={card.href}
-                  className={`group flex flex-col items-center text-center gap-4 p-7 rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${card.primary
+                  className={`group flex flex-col items-center text-center gap-3 p-5 sm:p-7 rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${card.primary
                     ? 'bg-primary border-primary hover:bg-primary-dark shadow-lg shadow-primary/25'
                     : 'bg-white/5 border-white/15 hover:border-primary/50 hover:bg-white/10'
                     }`}

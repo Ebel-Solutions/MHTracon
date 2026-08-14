@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { companyInfo, socialLinks, phoneNumbers, emailAddresses } from '@/data/company';
@@ -49,12 +49,12 @@ function FooterHeading({ children }: { children: React.ReactNode }) {
 export default function Footer() {
   return (
     <footer className="site-footer relative bg-secondary-dark text-white overflow-visible">
-      {/* ── Contact Info Card — straddles section/footer boundary */}
+      {/* â”€â”€ Contact Info Card â€” straddles section/footer boundary */}
       <ContactInfoBar />
 
-      {/* ── Main footer body ──────────────────────────────── */}
+      {/* â”€â”€ Main footer body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div
-        className="relative pt-50 md:pt-24 pb-16"
+        className="relative pt-[22rem] sm:pt-60 md:pt-36 lg:pt-28 pb-16"
         style={{
           backgroundImage: 'url(/images/shape/shape-4.png)',
           backgroundRepeat: 'repeat',
@@ -67,7 +67,7 @@ export default function Footer() {
         <div className="relative z-10 container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
 
-            {/* ── Col 1: Brand ──────────────────────────── */}
+            {/* â”€â”€ Col 1: Brand â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <div className="lg:col-span-1">
               <Link href="/" className="inline-block mb-5">
                 <Image
@@ -99,7 +99,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* ── Col 2: Quick Links ────────────────────── */}
+            {/* â”€â”€ Col 2: Quick Links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <div>
               <FooterHeading>Quick Links</FooterHeading>
               <ul className="space-y-2.5">
@@ -117,7 +117,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* ── Col 3: Our Services ───────────────────── */}
+            {/* â”€â”€ Col 3: Our Services â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <div>
               <FooterHeading>Our Services</FooterHeading>
               <ul className="space-y-2.5">
@@ -135,7 +135,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* ── Col 4: Contact Info ───────────────────── */}
+            {/* â”€â”€ Col 4: Contact Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <div>
               <FooterHeading>Contact Info</FooterHeading>
               <ul className="space-y-5">
@@ -201,7 +201,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Footer Bottom ─────────────────────────────────── */}
+      {/* â”€â”€ Footer Bottom â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="border-t border-white/10 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between py-5 gap-3">
@@ -217,7 +217,7 @@ export default function Footer() {
             </p>
             <p className="text-white/50 text-sm font-body">
               {companyInfo.disclaimer.length > 80
-                ? companyInfo.disclaimer.slice(0, 80) + '…'
+                ? companyInfo.disclaimer.slice(0, 80) + 'â€¦'
                 : companyInfo.disclaimer}
             </p>
           </div>
@@ -226,3 +226,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+

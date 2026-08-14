@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -12,21 +12,8 @@ import MobileMenu from './MobileMenu';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLLIElement>(null);
   const pathname = usePathname();
   const { isScrolled } = useScrollPosition(80);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   return (
     <>
@@ -52,41 +39,35 @@ export default function Navbar() {
             {/* Desktop Navigation */}
             <ul className="hidden lg:flex items-center gap-0">
               {navigationItems.map((item) => (
-                <li
-                  key={item.label}
-                  ref={item.children ? dropdownRef : undefined}
-                  className="relative group"
-                >
+                <li key={item.label} className="relative group">
                   {item.children ? (
                     <>
+                      {/* Hover trigger button — chevron rotates on hover */}
                       <button
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
                         className={cn(
                           'flex items-center gap-1 px-5 py-7 font-heading font-medium text-[15px] uppercase tracking-wide transition-colors',
-                          'hover:text-primary',
-                          dropdownOpen ? 'text-primary' : 'text-secondary'
+                          'hover:text-primary group-hover:text-primary',
+                          pathname.startsWith('/services') ? 'text-primary' : 'text-secondary'
                         )}
-                        aria-expanded={dropdownOpen}
                         aria-haspopup="true"
                       >
                         {item.label}
-                        <ChevronDown className="h-3.5 w-3.5" />
+                        <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180" />
                       </button>
+
+                      {/* Dropdown — pure CSS hover via parent group */}
                       <ul
-                        className={cn(
-                          'absolute top-full left-0 bg-white min-w-[220px] shadow-xl border-t-4 border-primary z-50 transition-all duration-200',
-                          dropdownOpen
-                            ? 'opacity-100 visible translate-y-0'
-                            : 'opacity-0 invisible -translate-y-2'
-                        )}
+                        className="absolute top-full left-0 bg-white min-w-[240px] shadow-xl border-t-4 border-primary z-50 transition-all duration-200 opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0"
                         role="menu"
                       >
                         {item.children.map((child) => (
                           <li key={child.label} role="menuitem">
                             <Link
                               href={child.href}
-                              className="block px-6 py-3 text-sm font-body text-gray-700 hover:text-primary hover:pl-8 transition-all border-b border-gray-100 last:border-b-0"
-                              onClick={() => setDropdownOpen(false)}
+                              className={cn(
+                                'block px-6 py-3 text-sm font-body hover:text-primary hover:pl-8 transition-all border-b border-gray-100 last:border-b-0',
+                                pathname === child.href ? 'text-primary font-semibold' : 'text-gray-700'
+                              )}
                             >
                               {child.label}
                             </Link>
@@ -113,8 +94,9 @@ export default function Navbar() {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileOpen(true)}
-              className="lg:hidden p-2 text-secondary"
+              className="lg:hidden flex items-center justify-center w-11 h-11 text-secondary hover:text-primary hover:bg-gray-100 rounded-md transition-colors touch-manipulation relative z-50"
               aria-label="Open mobile menu"
+              aria-expanded={mobileOpen}
             >
               <Menu className="h-6 w-6" />
             </button>

@@ -50,7 +50,7 @@ export default function ServiceGallery({
         </motion.div>
 
         {/* Masonry-style grid — first image spans 2 rows */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {images.map((img, i) => (
             <motion.div
               key={img.src + i}
@@ -59,7 +59,7 @@ export default function ServiceGallery({
               viewport={{ once: true, margin: '-60px' }}
               transition={{ delay: i * 0.07, duration: 0.5 }}
               className={`group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 ${
-                i === 0 ? 'row-span-2 aspect-[3/4]' : 'aspect-[4/3]'
+                i === 0 ? 'sm:row-span-2 aspect-video sm:aspect-[3/4]' : 'aspect-video'
               }`}
             >
               <Image
